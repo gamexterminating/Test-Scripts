@@ -4,7 +4,7 @@ require_once dirname(dirname(__FILE__))."/wp-load.php";
 
 global $wpdb;
 
-$notes = $wpdb->get_results("selct * from wp_animal_cage_notes order by created_at asc");
+$notes = $wpdb->get_results("select * from wp_animal_cage_notes order by created_at asc");
 
 $not_found_records = [];
 
@@ -25,14 +25,14 @@ foreach($notes as $note){
     }
 
     // get the oldest cage record for that address 
-    $oldest_record = $wpdb->get_row("select * form wp_cage_data where address_id = '$address_id' order by created_at desc");
+    $oldest_record = $wpdb->get_row("select * from wp_cage_data where address_id = '$address_id' order by created_at asc");
     if(!$oldest_record){
         $not_found_records[] = $note;
         continue;
     }
 
     // if that record has note = *No Note for old cage data then udpate to old note
-    if(trim($oldest_record->note) == "*No Note for old cage data"){
+    if(trim($oldest_record->notes) == "*No Note for old cage data"){
         $update_data = ['notes'  =>  $note->notes];
         $wpdb->update('wp_cage_data', $update_data, ['id' => $oldest_record->id]);
     }

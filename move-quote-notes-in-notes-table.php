@@ -2,6 +2,8 @@
 
 require_once dirname(dirname(__FILE__))."/wp-load.php";
 
+global $wpdb;
+
 $commercial_qutoes = $wpdb->get_results("select * from wp_commercial_quotesheet");
 
 foreach($commercial_qutoes as $quote){
@@ -16,7 +18,8 @@ foreach($commercial_qutoes as $quote){
         'updated_at'    =>  date('Y-m-d h:i:s', strtotime($quote->date)),        
     ];
 
-    $wpdb->insert("wp_commercial_quote_notes", $note_data);
+    $response = $wpdb->insert("wp_commercial_quote_notes", $note_data);
+    if(!$response) pdie($wpdb->last_error);
 }
 
 
