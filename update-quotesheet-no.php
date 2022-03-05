@@ -8,7 +8,7 @@ $case_sqls = array();
 $tbl_name = 'commercial_quotesheet';
 $records = $wpdb->get_results("select id,quote_no from {$wpdb->prefix}{$tbl_name}");
 
-$query = ['tbl' => $tbl_name, 'col' => 'quote_no']; 
+$query = ['tbl' => $tbl_name, 'col' => 'quote_no'];
 
 foreach ($records as $record) {
     if(!empty($record->quote_no)) continue;
