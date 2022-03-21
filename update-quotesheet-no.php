@@ -5,7 +5,7 @@ global $wpdb;
 
 $case_sqls = array(); 
 
-$tbl_name = 'quotesheet';
+$tbl_name = 'commercial_quotesheet';
 $records = $wpdb->get_results("select id,quote_no from {$wpdb->prefix}{$tbl_name}");
 
 $query = ['tbl' => $tbl_name, 'col' => 'quote_no'];
