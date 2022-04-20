@@ -8,7 +8,7 @@ $case_sqls = array();
 $tbl_name = 'cage_address';
 $tbl_inv = 'invoices';
 
-$records = $wpdb->get_results("select ca.*,max(inv.id) as inv_id,inv.client_name,inv.address from {$wpdb->prefix}{$tbl_name} as ca JOIN {$wpdb->prefix}{$tbl_inv} as inv on ca.name = inv.client_name AND ca.address = inv.address AND ca.invoice_id = '' GROUP BY inv.client_name,inv.address order by ca.id desc");
+$records = $wpdb->get_results("select ca.*,max(inv.id) as inv_id,inv.client_name,inv.address from {$wpdb->prefix}{$tbl_name} as ca JOIN {$wpdb->prefix}{$tbl_inv} as inv on ca.name = inv.client_name AND ca.address = inv.address AND ca.invoice_id = '' AND inv.phone_no != '' AND inv.email != '' GROUP BY inv.client_name,inv.address order by ca.id desc");
 
 $query = ['tbl' => $tbl_name, 'col' => 'invoice_id'];
 
